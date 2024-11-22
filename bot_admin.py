@@ -1,15 +1,19 @@
+from dotenv import load_dotenv
 from flask import Flask, request
 from telegram import Bot
 import asyncio
 import requests
 from io import BytesIO
 import threading
+import os
 
 app = Flask(__name__)
 # Настройки бота-администратора
-ADMIN_BOT_TOKEN = '7798675687:AAHKJ1FnY2t1J7xtmVnAipfa1xeMB4ylUqc'
+load_dotenv()
+BOT_ADMIN_TOKEN = os.getenv('BOT_ADMIN_TOKEN')
+
+admin_bot = Bot(token=BOT_ADMIN_TOKEN)
 ADMIN_CHAT_ID =  866765016 # Ваш Telegram ID или ID чата, куда будут приходить уведомления
-admin_bot = Bot(token=ADMIN_BOT_TOKEN)
 
 # Создаем отдельный event loop для асинхронных задач
 loop = asyncio.new_event_loop()
